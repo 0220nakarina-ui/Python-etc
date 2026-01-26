@@ -10,14 +10,22 @@ Dim 年 As Integer, 月 As Integer 'Integer=int
 Dim 開始日 As Date '該当月の1日目を設定
 Dim 最終日 As Integer '該当月の最終日を設定(28~30)
 Dim r, c As Integer  'r=Row(行)/c=Column(列)
-Dim d As Integer '日付を設定
+Dim day_cnt As Integer '日付を設定
 Dim 曜日 As Variant '曜日を設定(配列で扱う/Variantは何でも入るオールラウンダー)
 
 
-'入力ボックス作成・表示
-'Inputbox→文字として返す/CInt→数字に変換
-年 = CInt(InputBox("年を記入(例:2026)")) '年を入力する[入力ボックス]表示
-月 = CInt(InputBox("月を記入(例:1~12)")) '月(1~12)を入力
+'年の入力（簡単な例: 1900から2100でチェック）
+Do
+    年 = CInt(InputBox("年を記入(例:2026)"))
+Loop While 年 < 1900 Or 年 > 2100
+
+'月の入力（1から12でチェック）
+Do
+    月 = CInt(InputBox("月を記入(1から12)"))
+    If 月 < 1 Or 月 > 12 Then
+        MsgBox "1から12の数字を入力してください。再度入力してください。", vbExclamation
+    End If
+Loop While 月 < 1 Or 月 > 12
 
 
 ActiveSheet.Cells.Clear 'シートの中を削除しリセット
@@ -41,15 +49,15 @@ Next c '曜日作成(?)終了
 
 '日付表示設定
 開始日 = DateSerial(年, 月, 1) '該当月の1日目を設定
-最終日 = Day(DateSerial(年, 月 + 1, 0)) '該当月の最終日を設定(翌月0=今月最終日)
+最終日 = day(DateSerial(年, 月 + 1, 0)) '該当月の最終日を設定(翌月0=今月最終日)
 
 r = 3 '日付記入行設定(今回は3行目)
 c = Weekday(開始日, vbSunday) '1日目が何曜日か自動で取得
 
 
 'For使用/1~最終日まで繰り返す
-For d = 1 To 最終日
-    Cells(r, c).Value = d 'カレンダーに日付記入
+For day_cnt = 1 To 最終日
+    Cells(r, c).Value = day_cnt 'カレンダーに日付記入
     Cells(r, c).Font.Size = 15
     Cells(r, c).VerticalAlignment = xlTop 'セルの上寄せ(見やすくする)
     Cells(r, c).HorizontalAlignment = xlLeft 'セルの左寄せ(見やすくする)
@@ -74,11 +82,11 @@ For d = 1 To 最終日
         r = 7              ' 6週目以降は最終行に固定
     End If
 End If
-Next d
+Next day_cnt
 
 Columns("A:G").ColumnWidth = 20 '列幅設定
 Rows("3:7").RowHeight = 60 '日付行高さ設定
 Range("A2:G7").Borders.LineStyle = xlContinuous '枠線を引く
 
-End Sub
 
+End Sub
