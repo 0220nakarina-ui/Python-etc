@@ -1,0 +1,41 @@
+#ゲーム終了時、合計持ち点が低いほうが勝利
+import random #サイコロの出目はランダム
+
+#スタート時の手持ち点
+player_total = 0
+enemy_total = 0
+print("ゲームスタート")
+
+#サイコロゲーム開始, 5ターン
+for turn in range(1, 5 + 1):
+    print(f"\n=== 第 {turn} 投 ===")
+
+    #サイコロを投じよう
+    player_roll = random.randint(1, 6)
+    enemy_roll = random.randint(1, 6)
+
+    #両者分を変換して出力
+    print(f"あなた：{player_roll}")
+    print(f"相手　：{enemy_roll}")
+
+    #各ターン終了時の持ち点
+    player_total += player_roll
+    enemy_total += enemy_roll
+
+    print(f"現在のあなたの合計点: {player_total}")
+    print(f"現在の相手の合計点: {enemy_total}")
+
+#全ターン終了・結果発表
+print("\n=== 結果発表 ===")
+#こちらの持ち点合計
+print(f"あなたの合計：{player_total}")
+#相手の持ち点合計
+print(f"相手の合計　：{enemy_total}")
+
+#勝敗結果・もし点数が相手より低いければ勝利・高ければ負け・同点なら引き分けとする(条件分岐スタート)
+if player_total < enemy_total: # 持ち点が相手より低い場合
+    print("あなたの勝利！")
+elif enemy_total < player_total: # 相手の持ち点が低い場合
+    print("相手の勝利！")
+else: # 同点の場合
+    print("引き分け！")
