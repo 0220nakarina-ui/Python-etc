@@ -1,0 +1,22 @@
+# CSV作成
+import csv
+
+#空データ用ファイル作成・close() を忘れるとファイルが閉じないので注意
+open("empty.csv", "w", newline="").close()
+
+# Excelデータ作成
+with open("kuku.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+
+    # ヘッダー行を書き込み（例: '', 1, 2, ..., 9）
+    header = [""] + list(range(1, 10))
+    writer.writerow(header)
+
+# 九九の段作成開始
+    for Y in range(1, 10):       # 縦軸（Y）
+        row = [Y]  # 1行分のリストを用意（最初の要素はY値）
+        for X in range(1, 10):   # 横軸（X）
+            row.append(Y * X)    # 積をリストに追加
+        print(row)
+        # CSV書き込み・Excel出力
+        writer.writerow(row)  # 完全な行をCSVに書き込み
