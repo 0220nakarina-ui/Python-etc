@@ -1,0 +1,41 @@
+#リスト化
+#例
+#(a,B,a,B,a,B,a,B)
+#→(a,a,a):int
+#→(B,B,B):str
+#★同じ型を1つにまとめたもの→配列(リスト)
+
+#list = [1,2,3,4,5] :int
+#print(1) :2として出力
+#list = ["a","b","c"] :str
+#print(2) :cとして出力
+
+#number = [0,1,2,3,4,5,6,7,8,9,10]
+#cnt = [1,2,5,9]
+#print(cnt):number から cntの中のみ抽出
+#→二次元配列
+
+#format() メソッド
+#文字列中に {} を置き、format() で値を入れる
+#name = "Alice"
+#age = 27
+#print("名前は{}で、年齢は{}歳です".format(name, age)):名前はAliceで、年齢は27歳です として出力
+#Python3以降は [f文字列]も便利
+#print(f"名前は{name}で、年齢は{age}歳です")
+
+#join() 関数
+#文字列のリストをまとめて1つの文字列にする
+#words = ["パフェ", "は", "おいしい"]
+#sentence = " ".join(words)
+#print(sentence);出力: パフェ は おいしい として出力
+#注意点: join() 関数　は 文字列のリスト にしか使えない
+
+#数字リストを文字列に変換する必要がある
+#numbers = [1, 2, 3]
+#numbers_str = [str(n) for n in numbers]
+#print(", ".join(numbers_str)) : 1, 2, 3 として出力
+
+#リスト化で詰むときのチェックポイント
+#•リストの中身が正しい型か（文字列/数値）
+#•空リストの場合は join() できない
+#•ネストしたリストを使っていないか
