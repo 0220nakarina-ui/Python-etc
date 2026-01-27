@@ -49,7 +49,7 @@ Next c '曜日作成(?)終了
 
 '日付表示設定
 開始日 = DateSerial(年, 月, 1) '該当月の1日目を設定
-最終日 = day(DateSerial(年, 月 + 1, 0)) '該当月の最終日を設定(翌月0=今月最終日)
+最終日 = Day(DateSerial(年, 月 + 1, 0)) '該当月の最終日を設定(翌月0=今月最終日)
 
 r = 3 '日付記入行設定(今回は3行目)
 c = Weekday(開始日, vbSunday) '1日目が何曜日か自動で取得
@@ -71,22 +71,17 @@ For day_cnt = 1 To 最終日
     End If '色分け終了
     
     
-
     c = c + 1
-    If c > 7 Then
+If c > 7 Then
     c = 1
-   
-    If r < 7 Then
-        r = r + 1          ' 5行目までは通常
-    Else
-        r = 7              ' 6週目以降は最終行に固定
-    End If
+    r = r + 1
 End If
+
 Next day_cnt
 
 Columns("A:G").ColumnWidth = 20 '列幅設定
-Rows("3:7").RowHeight = 60 '日付行高さ設定
-Range("A2:G7").Borders.LineStyle = xlContinuous '枠線を引く
+Rows("3:8").RowHeight = 60 '日付行高さ設定
+Range("A2:G8").Borders.LineStyle = xlContinuous '枠線を引く
 
 
 End Sub
